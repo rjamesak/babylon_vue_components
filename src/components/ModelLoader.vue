@@ -44,16 +44,7 @@ import * as BABYLON from 'babylonjs';
                         }); // end model loading
 
                 })
-
-
-
-                // this.params = {
-                //     name: "",
-                //     url: "http://localhost:8000/",
-                //     filename: "Parrot.glb"
-                // }
-                // this.$emit('model-params-received', this.params);
-                // console.log('modelloader emitted: ', this.params)
+               
                 
             }, 
         },
