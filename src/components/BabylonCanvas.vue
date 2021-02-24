@@ -1,14 +1,20 @@
 <template>
     <div>
         <canvas id="renderCanvas" touch-action="none"></canvas> <!-- touch-action="none" for best results from PEP -->
+        <!-- <ModelLoader></ModelLoader> -->
+        <model-loader></model-loader>
     </div>
 </template>
 
 <script>
 import * as BABYLON from 'babylonjs';
+import ModelLoader from './ModelLoader.vue'
 //import { BabylonFileLoaderConfiguration } from 'babylonjs';
     export default {
-        name: 'babylon_canvas', 
+        name: 'BabylonCanvas', 
+        components: {
+            ModelLoader,
+        },
         methods: {
             createScene() {
                 this.scene = new BABYLON.Scene(this.engine);
@@ -31,10 +37,16 @@ import * as BABYLON from 'babylonjs';
                     this.renderedScene.render();
                 })
             },
+            addResizeListener() {
+                window.addEventListener("resize", () => {
+                    this.engine.resize();
+                })
+            }
         },
         mounted () {
             this.canvas = document.querySelector("#renderCanvas");
             this.engine = new BABYLON.Engine(this.canvas, true);
+            this.addResizeListener();
             this.go();
         },
     }

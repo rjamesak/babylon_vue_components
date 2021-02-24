@@ -1,19 +1,17 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-    <babylon_canvas></babylon_canvas>
+    <BabylonCanvas></BabylonCanvas>
   </div>
 </template>
 
 <script>
 //import HelloWorld from './components/HelloWorld.vue'
-import babylon_canvas from './components/BabylonCanvas.vue'
+import BabylonCanvas from './components/BabylonCanvas.vue'
 
 export default {
   name: 'App',
   components: {
-    babylon_canvas
+    BabylonCanvas
   }
 }
 </script>
