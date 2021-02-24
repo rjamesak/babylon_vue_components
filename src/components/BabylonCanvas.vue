@@ -2,18 +2,25 @@
     <div>
         <canvas id="renderCanvas" touch-action="none"></canvas> <!-- touch-action="none" for best results from PEP -->
         <!-- <ModelLoader></ModelLoader> -->
-        <model-loader></model-loader>
+        <!-- <model-loader v-if="isMounted" @model-params-received="loadModel"></model-loader> -->
+        <model-loader v-if="isMounted"></model-loader>
     </div>
 </template>
 
 <script>
 import * as BABYLON from 'babylonjs';
+import 'babylonjs-loaders';
 import ModelLoader from './ModelLoader.vue'
 //import { BabylonFileLoaderConfiguration } from 'babylonjs';
     export default {
         name: 'BabylonCanvas', 
         components: {
             ModelLoader,
+        },
+        data() {
+            return {
+                isMounted: false,
+            }
         },
         methods: {
             createScene() {
@@ -41,6 +48,17 @@ import ModelLoader from './ModelLoader.vue'
                 window.addEventListener("resize", () => {
                     this.engine.resize();
                 })
+            },
+            loadModel(params) {
+                console.log("in canvas, model params emitted: ", params);
+                BABYLON.SceneLoader.ImportMeshAsync(params.name, params.url, params.filename).then((result) => {
+                    this.rootMesh = result.meshes[0];
+                    this.rootMesh.position = new BABYLON.Vector3(0, 3, 0);
+                    this.rootMesh.name = "parrot"
+                    this.rootMesh.scaling.scaleInPlace(0.02)
+                    //const birdAnim = scene.getAnimationGroupByName("parrot_A_")
+                    //console.log("birdAnim: ", birdAnim)
+                    }); // end model loading
             }
         },
         mounted () {
@@ -48,6 +66,7 @@ import ModelLoader from './ModelLoader.vue'
             this.engine = new BABYLON.Engine(this.canvas, true);
             this.addResizeListener();
             this.go();
+            this.isMounted = true;
         },
     }
 </script>

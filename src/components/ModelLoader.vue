@@ -20,11 +20,21 @@ import * as BABYLON from 'babylonjs';
                     this.$emit('model-created', this.rootMesh)
                         
                     }); // end model loading
+
+
+
+                // this.params = {
+                //     name: "",
+                //     url: "http://localhost:8000/",
+                //     filename: "Parrot.glb"
+                // }
+                // this.$emit('model-params-received', this.params);
+                // console.log('modelloader emitted: ', this.params)
                 
             }, 
         },
         mounted () {
-            //this.getModel();
+            // fetch parameters
             console.log('modelLoader here...')
             this.getModel();
             },
