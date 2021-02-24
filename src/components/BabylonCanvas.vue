@@ -1,9 +1,11 @@
 <template>
-    <div>
+    <div class="canvas">
         <canvas id="renderCanvas" touch-action="none"></canvas> <!-- touch-action="none" for best results from PEP -->
         <!-- <ModelLoader></ModelLoader> -->
         <!-- <model-loader v-if="isMounted" @model-params-received="loadModel"></model-loader> -->
         <model-loader v-if="isMounted"></model-loader>
+        <Observables v-if="isMounted"></Observables>
+        <Gizmos v-if="isMounted"></Gizmos>
     </div>
 </template>
 
@@ -11,11 +13,15 @@
 import * as BABYLON from 'babylonjs';
 import 'babylonjs-loaders';
 import ModelLoader from './ModelLoader.vue'
+import Observables from './Observables.vue'
+import Gizmos from './Gizmos.vue'
 //import { BabylonFileLoaderConfiguration } from 'babylonjs';
     export default {
         name: 'BabylonCanvas', 
         components: {
             ModelLoader,
+            Observables,
+            Gizmos,
         },
         data() {
             return {
@@ -37,6 +43,7 @@ import ModelLoader from './ModelLoader.vue'
             makeFloor() {
                 this.ground = BABYLON.MeshBuilder.CreateGround("ground", {width:10, height: 10 });
                 this.ground.position = new BABYLON.Vector3(0, -0.5, 0);
+                this.ground.isPickable = false;
             }, 
             go() {
                 this.renderedScene = this.createScene();
@@ -77,6 +84,12 @@ import ModelLoader from './ModelLoader.vue'
     width: 100%;
     height: 100%;
     touch-action: none;
+    position: relative;
+}
+.canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 </style>
