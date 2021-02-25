@@ -6,6 +6,7 @@
         <model-loader v-if="isMounted"></model-loader>
         <Observables v-if="isMounted"></Observables>
         <Gizmos v-if="isMounted"></Gizmos>
+        <ObjectExporter v-if="isMounted"></ObjectExporter>
     </div>
 </template>
 
@@ -15,6 +16,7 @@ import 'babylonjs-loaders';
 import ModelLoader from './ModelLoader.vue'
 import Observables from './Observables.vue'
 import Gizmos from './Gizmos.vue'
+import ObjectExporter from './ObjectExporter.vue'
 //import { BabylonFileLoaderConfiguration } from 'babylonjs';
     export default {
         name: 'BabylonCanvas', 
@@ -22,6 +24,7 @@ import Gizmos from './Gizmos.vue'
             ModelLoader,
             Observables,
             Gizmos,
+            ObjectExporter,
         },
         data() {
             return {
@@ -33,6 +36,7 @@ import Gizmos from './Gizmos.vue'
                 this.scene = new BABYLON.Scene(this.engine);
                 this.camera = new BABYLON.ArcRotateCamera("camera", -Math.PI / 2, Math.PI / 2.5, 3, new BABYLON.Vector3(0, 0, 0));
                 this.camera.position = new BABYLON.Vector3(0, 10, -20);
+                this.camera.wheelDeltaPercentage = 0.01;
                 this.camera.attachControl(this.canvas, true);
                 //this.scene.createDefaultLight();
                 this.light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 20, 0));

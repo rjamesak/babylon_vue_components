@@ -24,7 +24,14 @@ import * as BABYLON from 'babylonjs';
                             filename: "Logo.gltf.glb",
                             position: {x: -2, y: 2, z: -1},
                             scaling: 0.1,
-                        }
+                        },
+                        // {
+                        //     name: "",
+                        //     url: "http://localhost:8000/",
+                        //     filename: "Logo.babylon",
+                        //     position: {x: 2, y: 3, z: -1},
+                        //     scaling: 0.1,
+                        // }
                     ]
             }
         },
